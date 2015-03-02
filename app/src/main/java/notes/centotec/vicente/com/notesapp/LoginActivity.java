@@ -25,15 +25,6 @@ public class LoginActivity extends Activity {
         setContentView(R.layout.login_activity);
         this.username= (TextView) findViewById(R.id.login_activity_itxt_username);
         this.password= (TextView) findViewById(R.id.login_activity_ipwd_password);
-        if (savedInstanceState != null) {//recreate activity
-            String storedUsername=savedInstanceState.getString(USERNAME_KEY);
-            String storedPassword=savedInstanceState.getString(PASSWORD_KEY);
-            if(storedUsername!=null){
-                username.setText(storedUsername);
-            }else if(storedPassword!=null){
-                password.setText(storedPassword);
-            }
-        }
     }
 
     @Override
@@ -48,6 +39,17 @@ public class LoginActivity extends Activity {
         }
     }
 
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        // Always call the superclass so it can restore the view hierarchy
+        super.onRestoreInstanceState(savedInstanceState);
+        String storedUsername=savedInstanceState.getString(USERNAME_KEY);
+        String storedPassword=savedInstanceState.getString(PASSWORD_KEY);
+        if(storedUsername!=null){
+            username.setText(storedUsername);
+        }else if(storedPassword!=null){
+            password.setText(storedPassword);
+        }
+    }
 
     public void login(View view){
         String userNameValue=username.getText().toString();
